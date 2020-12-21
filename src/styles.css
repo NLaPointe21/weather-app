@@ -8,7 +8,7 @@ h4 {
 h1 {
   color: #0278ae;
   font-family: "Montserrat", sans-serif;
-  font-size: 4.1rem;
+  font-size: 4.2rem;
   margin-bottom: 0;
 }
 
@@ -50,6 +50,7 @@ p {
   /* Day */
   background-image: linear-gradient(#fdfbfb 0%, #ebedee 100%);
   border: 2px solid black;
+  border-radius: 5px;
   margin-top: 40px;
   padding: 20px 0 20px 0;
   width: 450px;
@@ -84,22 +85,11 @@ p {
   width: 35%;
 }
 
-.metric-units,
-.unit-divider,
-.imperial-units {
+.units {
   font-size: 1.2rem;
-}
-.metric-units {
-  padding: 0 5px 0 10px;
-}
-
-.metric-units,
-.imperial-units:hover {
-  cursor: pointer;
-}
-
-.imperial-units {
-  padding: 0 5px;
+  padding-left: 5px;
+  position: relative;
+  top: -32px;
 }
 
 .current-day {
