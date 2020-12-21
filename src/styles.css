@@ -27,7 +27,7 @@ h4 {
   margin: 0;
 }
 
-h5 {
+li {
   font-family: "Quicksand", sans-serif;
   font-size: 20px;
   line-height: 0.75;
@@ -42,9 +42,10 @@ p {
 }
 
 .body {
+  /* Night */
+  /* background-image: linear-gradient(to top, #09203f 0%, #537895 100%); */
+  /* Day */
   background-image: linear-gradient(#fdfbfb 0%, #ebedee 100%);
-  /* 120deg, */
-  /* background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%); */
   border: 2px solid black;
   margin-top: 40px;
   padding: 20px 0 20px 0;
