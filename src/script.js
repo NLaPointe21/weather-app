@@ -1,55 +1,54 @@
-let now = new Date();
-let dateTime = document.querySelector(".date-time");
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()];
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
-let date = now.getDate();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-let months = [
-  "Janurary",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-let month = months[now.getMonth()];
+  let day = days[date.getDay()];
 
-function addZeroHours() {
+  let todaysDate = date.getDate();
+
+  let months = [
+    "Janurary",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[date.getMonth()];
+
+  return `${day}, ${todaysDate} ${month} | ${formatHoursMinutes}`;
+}
+
+function formatHoursMinutes(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
   if (hours < 10) {
-    return (hours = "0" + hours);
-  } else {
-    return hours;
+    hours = `0${hours}`;
   }
-}
-let hours = now.getHours();
-let hoursZero = addZeroHours();
-
-function addZeroMinutes() {
+  let minutes = date.getMinutes();
   if (minutes < 10) {
-    return (minutes = "0" + minutes);
-  } else {
-    return minutes;
+    minutes = `0${minutes}`;
   }
+  return `${hours}:${minutes}`;
 }
-let minutes = now.getMinutes();
-let minutesZero = addZeroMinutes();
 
-dateTime.innerHTML = `${day}, ${date} ${month} | ${hours}:${minutes}`;
+let dateTime = document.querySelector(".date-time");
+dateTime.innerHTML = formatDate;
 
 // ------------------------------City Search w/out API -------------------------------------------------
 // function citySearch(event) {
@@ -112,12 +111,14 @@ function showTemp(response) {
   let temp = Math.round(response.data.main.temp);
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = `${temp}`;
-  let humidity = document.querySelector(".humidity");
-  humidity.innerHTML = response.data.main.humidity;
-  let windSpeed = document.querySelector(".wind");
-  windSpeed.innerHTML = Math.round(response.data.wind.speed);
-  let description = document.querySelector(".weather-description");
-  description.innerHTML = response.data.weather[0].description;
+  let humidityElement = document.querySelector(".humidity");
+  humidityElement.innerHTML = response.data.main.humidity;
+  let windElement = document.querySelector(".wind");
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  let descriptionElement = document.querySelector(".weather-description");
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  // let iconElement = document.querySelector(".current-day-icon");
+  // iconElement.innerHTML =
 }
 
 function showPosition(position) {
