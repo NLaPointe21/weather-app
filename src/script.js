@@ -72,12 +72,45 @@ function displayTemp(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
+// --------------------------------------------FORECAST------------------------------------------
+/ function dispalyForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+    <div class="col-2 hourly-forecast">
+      <h4> ${formatHours(forecast.dt * 1000)}</h4>
+      <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" class="weather-icons" alt=""></img>
+      <p>${Math.round(forecast.main.temp)}°</p>
+    </div>`;
+  }
+}
+
+
+
+
+   
+       
+      
+        
+      
+  
+  `;
+  }
+}
+
 
 // ----------------------------------------SEARCH FOR CITY---------------------------------------
 function search(city) {
   let apiKey = "bcab18012202c8b1538d81911758744a";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemp);
+
+  apiUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function searchSubmit(event) {
@@ -96,6 +129,9 @@ function searchCity(position) {
   let apiKey = "bcab18012202c8b1538d81911758744a";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayTemp);
+
+  apiUrl = `http://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function getCurrentPosition(event) {
@@ -105,3 +141,5 @@ function getCurrentPosition(event) {
 
 let locationButton = document.querySelector(".current-location");
 locationButton.addEventListener("click", getCurrentPosition);
+
+search("london");
