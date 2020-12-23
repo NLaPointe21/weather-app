@@ -68,7 +68,7 @@ function displayTemp(response) {
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
@@ -83,7 +83,7 @@ function displayForecast(response) {
     forecastElement.innerHTML += `
     <div class="col-2 hourly-forecast">
       <h4>${formatHoursMinutes(forecast.dt * 1000)}</h4>
-      <img src="http://openweathermap.org/img/wn/${
+      <img src="https://openweathermap.org/img/wn/${
         forecast.weather[0].icon
       }@2x.png" class="weather-icons"/>
       <p>${Math.round(forecast.main.temp)}°</p>
@@ -96,7 +96,7 @@ function search(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemp);
 
-  apiUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
   axios.get(apiUrl).then(displayForecast);
 }
 
