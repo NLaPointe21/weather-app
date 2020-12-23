@@ -129,7 +129,7 @@ function getCurrentPosition(event) {
 let locationButton = document.querySelector(".current-location");
 locationButton.addEventListener("click", getCurrentPosition);
 
-// -------------------
+// ---------------------------------°C to °F-----------------------------------
 function displayCelcius(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#current-temp");
