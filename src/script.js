@@ -31,10 +31,10 @@ function formatDate() {
   ];
   let month = months[date.getMonth()];
 
-  return `${day}, ${today} ${month} | ${formatHours()}`;
+  return `${day}, ${today} ${month} | ${formatHoursMinutes()}`;
 }
 
-function formatHours() {
+function formatHoursMinutes() {
   let date = new Date();
   let hours = date.getHours();
   if (hours < 10) {
@@ -73,36 +73,23 @@ function displayTemp(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 // --------------------------------------------FORECAST------------------------------------------
-/ function dispalyForecast(response) {
-  let forecastElement = document.querySelector("#forecast");
+function displayForecast(response) {
+  let forecastElement = document.querySelector(".forecast-div");
   forecastElement.innerHTML = null;
   let forecast = null;
 
-  for (let index = 0; index < 6; index++) {
+  for (let index = 0; index < 5; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
     <div class="col-2 hourly-forecast">
-      <h4> ${formatHours(forecast.dt * 1000)}</h4>
-      <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" class="weather-icons" alt=""></img>
+      <h4>${formatHoursMinutes(forecast.dt * 1000)}</h4>
+      <img src="http://openweathermap.org/img/wn/${
+        forecast.weather[0].icon
+      }@2x.png" class="weather-icons"/>
       <p>${Math.round(forecast.main.temp)}°</p>
     </div>`;
   }
 }
-
-
-
-
-   
-       
-      
-        
-      
-  
-  `;
-  }
-}
-
-
 // ----------------------------------------SEARCH FOR CITY---------------------------------------
 function search(city) {
   let apiKey = "bcab18012202c8b1538d81911758744a";
@@ -142,4 +129,28 @@ function getCurrentPosition(event) {
 let locationButton = document.querySelector(".current-location");
 locationButton.addEventListener("click", getCurrentPosition);
 
-search("london");
+// -------------------
+function displayCelcius(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temp");
+  celciusTemp.classList.add("active");
+  fahrenheitTemp.classList.remove("active");
+  tempElement.innerHTML = Math.round(celciusTemp);
+}
+
+function displayFarenheit(event) {
+  event.preventDefault();
+  let tempElement = document.querySelector("#current-temp");
+  celciusTemp.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
+  let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
+  tempElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+let fahrenheitTemp = document.querySelector(".imperial-units");
+fahrenheitTemp.addEventListener("click", displayFarenheit);
+
+let celciusTemp = document.querySelector(".metric-units");
+celciusTemp.addEventListener("click", displayCelcius);
+
+search("Amsterdam");
