@@ -18,7 +18,7 @@ h2 {
 }
 
 h3 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   margin: 0 0 55px;
 }
 
@@ -115,8 +115,9 @@ p {
 
 .weather-icons {
   color: #0278ae;
+  display: block;
   font-size: 2.8rem;
-  text-align: center;
+  margin: 0 auto;
 }
 
 .hourly-forecast {

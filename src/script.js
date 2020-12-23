@@ -1,6 +1,6 @@
 // --------------------------------------- DATE + TIME-------------------------------------------
-function formatDate() {
-  let date = new Date();
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
   let days = [
     "Sunday",
@@ -31,11 +31,11 @@ function formatDate() {
   ];
   let month = months[date.getMonth()];
 
-  return `${day}, ${today} ${month} | ${formatHoursMinutes()}`;
+  return `${day}, ${today} ${month} | ${formatHoursMinutes(timestamp)}`;
 }
 
-function formatHoursMinutes() {
-  let date = new Date();
+function formatHoursMinutes(timestamp) {
+  let date = new Date(timestamp);
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -82,11 +82,15 @@ function displayForecast(response) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
     <div class="col-2 hourly-forecast">
-      <h4>${formatHoursMinutes(forecast.dt * 1000)}</h4>
-      <img src="https://openweathermap.org/img/wn/${
-        forecast.weather[0].icon
-      }@2x.png" class="weather-icons"/>
-      <p>${Math.round(forecast.main.temp)}°</p>
+      <h4>
+        ${formatHoursMinutes(forecast.dt * 1000)}
+      </h4>
+      <img 
+        src="https://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png" 
+      class="weather-icons"/>
+      <p>${Math.round(forecast.main.temp_max)}°</p>
     </div>`;
   }
 }
@@ -132,16 +136,16 @@ locationButton.addEventListener("click", getCurrentPosition);
 // ---------------------------------°C to °F-----------------------------------
 function displayCelcius(event) {
   event.preventDefault();
-  let tempElement = document.querySelector("#current-temp");
-  celciusTemp.classList.add("active");
+  celciusLink.classList.add("active");
   fahrenheitTemp.classList.remove("active");
-  tempElement.innerHTML = Math.round(celciusTemp);
+  let tempElement = document.querySelector("#current-temp");
+  tempElement.innerHTML = Math.round(celsiusTemp);
 }
 
 function displayFarenheit(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#current-temp");
-  celciusTemp.classList.remove("active");
+  celciusLink.classList.remove("active");
   fahrenheitTemp.classList.add("active");
   let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
   tempElement.innerHTML = Math.round(fahrenheitTemperature);
@@ -150,7 +154,7 @@ function displayFarenheit(event) {
 let fahrenheitTemp = document.querySelector(".imperial-units");
 fahrenheitTemp.addEventListener("click", displayFarenheit);
 
-let celciusTemp = document.querySelector(".metric-units");
-celciusTemp.addEventListener("click", displayCelcius);
+let celciusLink = document.querySelector(".metric-units");
+celciusLink.addEventListener("click", displayCelcius);
 
 search("Amsterdam");
