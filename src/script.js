@@ -117,7 +117,7 @@ function searchCity(position) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayTemp);
 
-  apiUrl = `http://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${lat}&lon=${lon}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayForecast);
 }
 
