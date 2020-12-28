@@ -31,19 +31,14 @@ function formatDate(timestamp) {
   ];
   let month = months[date.getMonth()];
 
-  return `${day}, ${today} ${month} | ${formatHoursMinutes(timestamp)}`;
+  return `${day}, ${today} ${month} | ${formatHoursMinutes(date)}`;
 }
 
-function formatHoursMinutes(timestamp) {
-  let date = new Date(timestamp);
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
+function formatHoursMinutes(forecastTS) {
+  let date = new Date(forecastTS);
+  let hours = date.getHours().toString().padStart(2, "0");
+
+  let minutes = date.getMinutes().toString().padStart(2, "0");
 
   return `${hours}:${minutes}`;
 }
